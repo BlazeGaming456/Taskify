@@ -1,12 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import { PORT, mongoDBUrl } from "./config.js";
 import taskRouter from "./routes/taskRoutes.js";
 import { User } from "./models/userModel.js";
+import "dotenv/config";
 
-// import dotenv from 'dotenv';
-// dotenv.config();
+const PORT = process.env.PORT || 3000;
+const mongoDBUrl = process.env.mongoDBUrl;
 
 const app = express();
 
