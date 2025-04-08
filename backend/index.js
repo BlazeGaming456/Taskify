@@ -13,7 +13,7 @@ const app = express();
 a// CORS Middleware must come FIRST
 const corsOptions = {
   origin: [
-    'https://taskify-backend-lyart.vercel.app/',
+    'https://taskify-frontend-okzvvkmuo-blazegaming456s-projects.vercel.app',
     'http://localhost:3000',
     'http://localhost:5173'
   ],
