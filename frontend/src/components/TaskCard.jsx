@@ -5,6 +5,8 @@ import { TbEdit } from "react-icons/tb";
 import { BsClockFill, BsClockHistory } from "react-icons/bs";
 import axios from 'axios';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const TaskCard = ({ task, updateTaskStatus, color, onOpenModal }) => {
   const [status, setStatus] = useState(task.status);
   const id = task._id;
@@ -27,7 +29,7 @@ const TaskCard = ({ task, updateTaskStatus, color, onOpenModal }) => {
   const { bg, border } = colorMap[color] || { bg: 'bg-gray-300', border: 'bg-gray-500' };
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/tasks/${id}`)
+    axios.get(`${BACKEND_URL}/tasks/${id}`)
       .then((response) => {
         setStatus(response.data.task.status);
       })
@@ -37,7 +39,7 @@ const TaskCard = ({ task, updateTaskStatus, color, onOpenModal }) => {
   }, [id]);
 
   const handleStatus = () => {
-    axios.put(`http://localhost:3000/tasks/${task._id}`, { status: !status })
+    axios.put(`${BACKEND_URL}/tasks/${task._id}`, { status: !status })
       .then((response) => {
         setStatus(!status);
         updateTaskStatus(task._id, !status);

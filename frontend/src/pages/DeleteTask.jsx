@@ -6,6 +6,8 @@ import { FaLongArrowAltLeft } from 'react-icons/fa';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const DeleteTask = () => {
   const [task, setTask] = useState({});
   const [loading, setLoading] = useState(false);
@@ -14,7 +16,7 @@ const DeleteTask = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:3000/tasks/${id}`).then((response) => {
+    axios.get(`${BACKEND_URL}/tasks/${id}`).then((response) => {
       setTask(response.data.task);
       setLoading(false);
     }).catch((error) => {
@@ -25,7 +27,7 @@ const DeleteTask = () => {
 
   const handleDeleteTask = () => {
     setLoading(true);
-    axios.delete(`http://localhost:3000/tasks/${id}`).then(() => {
+    axios.delete(`${BACKEND_URL}/tasks/${id}`).then(() => {
       setLoading(false);
       navigate('/Home');
     }).catch((error) => {

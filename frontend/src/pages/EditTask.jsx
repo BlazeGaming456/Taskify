@@ -6,6 +6,8 @@ import Logo from '../images/logo.png';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { SpinnerRoundFilled } from 'spinners-react';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const EditTask = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -17,7 +19,7 @@ const EditTask = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:3000/tasks/${id}`).then((response) => {
+    axios.get(`${BACKEND_URL}/tasks/${id}`).then((response) => {
       setTitle(response.data.task.title);
       setDescription(response.data.task.description);
       setCategory(response.data.task.category);
@@ -33,7 +35,7 @@ const EditTask = () => {
   const handleEditTask = () => {
     const data = { title, description, category, priority};
     setLoading(true);
-    axios.put(`http://localhost:3000/tasks/${id}`, data).then(() => {
+    axios.put(`${BACKEND_URL}/tasks/${id}`, data).then(() => {
       setLoading(false);
       navigate('/Home');
     }).catch((error) => {

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { SpinnerRoundFilled } from 'spinners-react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const SignUp = () => {
   const [user, setUser ] = useState('');
   const [password, setPassword] = useState('');
@@ -26,9 +28,9 @@ const SignUp = () => {
     e.preventDefault();
     setLoading(true);
     const data = { user, password };
-    axios.post("http://localhost:3000/users/signup", data).then((result) => {
+    axios.post(`${BACKEND_URL}/users/signup`, data).then((result) => {
       console.log(result);
-      navigate("/users/login");
+      navigate("/");
       setLoading(false);
     }).catch((err) => {
       console.log(err);
@@ -81,7 +83,7 @@ const SignUp = () => {
             </button>
           </form>
           <p className='mt-4 text-center'>Already have an account?</p>
-          <Link to="/users/login" className='block text-center mt-2 text-blue-500 hover:underline'>
+          <Link to="/" className='block text-center mt-2 text-blue-500 hover:underline'>
             Login
           </Link>
         </div>

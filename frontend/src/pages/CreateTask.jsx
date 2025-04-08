@@ -7,6 +7,8 @@ import Logo from '../images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { SpinnerRoundFilled } from 'spinners-react';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CreateTask = () => {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
@@ -20,7 +22,7 @@ const CreateTask = () => {
     const data = { title, description, category, priority, status};
     console.log('Data:', data);
     setLoading(true);
-    axios.post('http://localhost:3000/tasks', data)
+    axios.post(`${BACKEND_URL}/tasks`, data)
       .then(() => {
         setLoading(false);
         navigate('/Home');

@@ -10,6 +10,8 @@ import Logo from '../images/logo.png';
 import TaskCategory from '../components/TaskCategory';
 import TaskModal from '../components/TaskModal';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState("All Tasks");
@@ -40,7 +42,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://localhost:3000/tasks').then((response) => {
+    axios.get(`${BACKEND_URL}/tasks`).then((response) => {
       setTasks(response.data.data);
       setLoading(false);
       setFilteredTasks({

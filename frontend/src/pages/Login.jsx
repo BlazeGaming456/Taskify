@@ -4,6 +4,8 @@ import axios from 'axios';
 import { SpinnerRoundFilled } from 'spinners-react';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Login = () => {
   const [user, setUser ] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     const data = { user, password };
-    axios.post("http://localhost:3000/users/login", data).then((result) => {
+    axios.post(`${BACKEND_URL}/users/login`, data).then((result) => {
       console.log(result);
       if (result.data.message === "Login successful") {
         navigate("/Home");
